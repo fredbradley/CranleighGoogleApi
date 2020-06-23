@@ -2,40 +2,67 @@
 
 namespace fredbradley\CranleighGoogleApi;
 
-use fredbradley\CranleighGoogleApi\Maps\GoogleActivity;
+use fredbradley\CranleighGoogleApi\Traits\Reports;
 
+
+/**
+ * Class CranleighGoogleApi
+ * @package fredbradley\CranleighGoogleApi
+ */
 class CranleighGoogleApi
 {
+    use Reports;
+
+    /**
+     * @var \Google_Client
+     */
     protected $client;
-    protected $drive;
+    /**
+     * @var \Google_Service_Drive
+     */
+    public $drive;
+    /**
+     * @var \Google_Service_Reports
+     */
+    public $reports;
 
-    public function getLatestActivity(string $email, string $application) {
-        $results = $this->reports->activities->listActivities($email, $application);
+    /**
+     * @var array
+     */
+    private $scopes = [
+        \Google_Service_Drive::DRIVE,
+        \Google_Service_Reports::ADMIN_REPORTS_USAGE_READONLY,
+        \Google_Service_Reports::ADMIN_REPORTS_AUDIT_READONLY,
+    ];
 
-        $collection = collect($results);
-        $return = $collection->mapInto(GoogleActivity::class);
-     return $return;
-    }
-    // Build wonderful things
-    public function test($yearGroup, $house, $forename, $surname)
+    /**
+     * CranleighGoogleApi constructor.
+     * @throws \Exception
+     */
+    public function __construct()
     {
-        $userKey = 'all';
-        $applicationName = 'login';
+        $this->client = $this->getClient($this->scopes);
 
-        $results = $this->reports->activities->listActivities($userKey, $applicationName);
-        dd($results->getItems());
-        $files = $this->drive->files->listFiles([
-            'spaces' => 'drive',
-            'q' => (sprintf('name contains "%s %s %s %s"', $yearGroup, $house, $forename, $surname)),
-        ]);
-        dd($files);
+        $this->reports = new \Google_Service_Reports($this->client);
+
+        $this->drive = new \Google_Service_Drive($this->client);
     }
 
-    public function setup()
+    /**
+     * @return string
+     */
+    public function __toString()
     {
-        $thing = $this->reports;
+        return "Scoped: " . implode(", ", $this->scopes);
+
     }
 
+
+    /**
+     * @param array $scopes
+     * @return \Google_Client
+     * @throws \Google_Exception
+     */
     private function getClient($scopes = [])
     {
 
@@ -51,7 +78,7 @@ class CranleighGoogleApi
         // The file token.json stores the user's access and refresh tokens, and is
         // created automatically when the authorization flow completes for the first
         // time.
-        $tokenPath = base_path('token.json');
+        $tokenPath = base_path('cranleigh-google-api-token.json');
         if (file_exists($tokenPath)) {
             $accessToken = json_decode(file_get_contents($tokenPath), true);
             $client->setAccessToken($accessToken);
@@ -89,15 +116,5 @@ class CranleighGoogleApi
         return $client;
     }
 
-    public function __construct()
-    {
-        $scopes = [
-            \Google_Service_Drive::DRIVE,
-            \Google_Service_Reports::ADMIN_REPORTS_USAGE_READONLY,
-            \Google_Service_Reports::ADMIN_REPORTS_AUDIT_READONLY,
-        ];
-        $this->client = $this->getClient($scopes);
-        $this->reports = new \Google_Service_Reports($this->client);
-    }
 
 }

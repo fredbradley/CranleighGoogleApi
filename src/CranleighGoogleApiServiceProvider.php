@@ -79,7 +79,7 @@ class CranleighGoogleApiServiceProvider extends ServiceProvider
 
         // Registering package commands.
         $this->commands([
-            RemoveAndRefreshGoogleToken::class
+            RemoveAndRefreshGoogleToken::class,
         ]);
     }
 }

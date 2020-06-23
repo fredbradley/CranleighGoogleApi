@@ -45,7 +45,8 @@ class RemoveAndRefreshGoogleToken extends Command
         } else {
             $this->error("The file didn't exist to start with!");
         }
-        $this->comment($api->setup());
+
+        $this->comment((new $api));
 
     }
 }

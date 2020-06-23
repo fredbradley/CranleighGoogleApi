@@ -6,7 +6,7 @@ namespace fredbradley\CranleighGoogleApi\Maps;
 
 class GoogleActivity
 {
-    public $ip_address;
+//    public $ip_address;
     private function getParameterKeys()
     {
         return [
@@ -20,6 +20,7 @@ class GoogleActivity
         ];
     }
 
+
     public function __construct(\Google_Service_Reports_Activity $input)
     {
         $new_event = [];
@@ -30,7 +31,9 @@ class GoogleActivity
                 }
             }
         }
-
+        if (!isset($new_event['ip_address'])) {
+            $new_event['ip_address'] = null;
+        }
 
         //unset($input->events[0]);
 //        $this->things = $input;
