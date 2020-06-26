@@ -1,7 +1,7 @@
 {
     "name": "fredbradley/cranleighgoogleapi",
     "description": "Laravel Service Provider for the Google API",
-    "license": "GPLv3",
+    "license": "MIT",
     "authors": [
         {
             "name": "Fred Bradley",
