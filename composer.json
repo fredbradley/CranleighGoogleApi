@@ -21,8 +21,7 @@
         "mockery/mockery": "^1.1",
         "orchestra/testbench": "~3|~4",
         "sempro/phpunit-pretty-print": "^1.0",
-        "friendsofphp/php-cs-fixer": "^2.16",
-        "vimeo/psalm": "^3.12"
+        "friendsofphp/php-cs-fixer": "^2.16"
     },
     "autoload": {
         "psr-4": {
@@ -37,7 +36,6 @@
     "scripts": {
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
-        "psalm": "vendor/bin/psalm --show-info=true",
         "format": "vendor/bin/php-cs-fixer fix"
     },
     "extra": {

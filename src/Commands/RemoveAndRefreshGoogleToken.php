@@ -35,6 +35,7 @@ class RemoveAndRefreshGoogleToken extends Command
     /**
      * Execute the console command.
      *
+     * @param CranleighGoogleApi $api
      * @return mixed
      */
     public function handle(CranleighGoogleApi $api)
