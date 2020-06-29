@@ -47,6 +47,5 @@ class RemoveAndRefreshGoogleToken extends Command
         }
 
         $this->comment((new $api));
-
     }
 }

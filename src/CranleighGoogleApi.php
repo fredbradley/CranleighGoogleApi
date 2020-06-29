@@ -4,7 +4,6 @@ namespace fredbradley\CranleighGoogleApi;
 
 use fredbradley\CranleighGoogleApi\Traits\Reports;
 
-
 /**
  * Class CranleighGoogleApi
  * @package fredbradley\CranleighGoogleApi
@@ -54,7 +53,6 @@ class CranleighGoogleApi
     public function __toString()
     {
         return "Scoped: " . implode(", ", $this->scopes);
-
     }
 
 
@@ -65,7 +63,6 @@ class CranleighGoogleApi
      */
     private function getClient($scopes = [])
     {
-
         $client = new \Google_Client();
         $client->setApplicationName('Reports API PHP Quickstart');
         $client->setScopes($scopes);
@@ -115,6 +112,4 @@ class CranleighGoogleApi
 
         return $client;
     }
-
-
 }

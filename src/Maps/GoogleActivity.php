@@ -3,7 +3,6 @@
 
 namespace fredbradley\CranleighGoogleApi\Maps;
 
-
 class GoogleActivity
 {
 //    public $ip_address;
@@ -16,7 +15,7 @@ class GoogleActivity
             'ip_address',
             'organizer_email',
             'meeting_code',
-            'is_external'
+            'is_external',
         ];
     }
 
@@ -31,7 +30,7 @@ class GoogleActivity
                 }
             }
         }
-        if (!isset($new_event['ip_address'])) {
+        if (! isset($new_event['ip_address'])) {
             $new_event['ip_address'] = null;
         }
 
