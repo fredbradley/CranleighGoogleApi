@@ -12,6 +12,7 @@
     "homepage": "https://github.com/fredbradley/cranleighgoogleapi",
     "keywords": ["Laravel", "CranleighGoogleApi"],
     "require": {
+        "php": "^7.2",
         "illuminate/support": "~5|~6|~7",
         "google/apiclient": "^2.0"
     },
@@ -19,7 +20,9 @@
         "phpunit/phpunit": "^8.0",
         "mockery/mockery": "^1.1",
         "orchestra/testbench": "~3|~4",
-        "sempro/phpunit-pretty-print": "^1.0"
+        "sempro/phpunit-pretty-print": "^1.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "vimeo/psalm": "^3.12"
     },
     "autoload": {
         "psr-4": {
@@ -30,6 +33,12 @@
         "psr-4": {
             "fredbradley\\CranleighGoogleApi\\Tests\\": "tests"
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "psalm": "vendor/bin/psalm --show-info=true",
+        "format": "vendor/bin/php-cs-fixer fix"
     },
     "extra": {
         "laravel": {
