@@ -1,6 +1,5 @@
 <?php
 
-
 namespace fredbradley\CranleighGoogleApi\Maps;
 
 class GoogleActivity
@@ -19,14 +18,13 @@ class GoogleActivity
         ];
     }
 
-
     public function __construct(\Google_Service_Reports_Activity $input)
     {
         $new_event = [];
         foreach ($input->events as $key => $event) {
             foreach ($event->parameters as $parameter) {
                 if (in_array($parameter->name, $this->getParameterKeys())) {
-                    $new_event[ $parameter->name ] = $parameter->value;
+                    $new_event[$parameter->name] = $parameter->value;
                 }
             }
         }

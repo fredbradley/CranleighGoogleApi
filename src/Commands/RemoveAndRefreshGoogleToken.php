@@ -1,6 +1,5 @@
 <?php
 
-
 namespace fredbradley\CranleighGoogleApi\Commands;
 
 use fredbradley\CranleighGoogleApi\CranleighGoogleApi;

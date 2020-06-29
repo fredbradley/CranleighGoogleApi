@@ -5,8 +5,7 @@ namespace fredbradley\CranleighGoogleApi;
 use fredbradley\CranleighGoogleApi\Traits\Reports;
 
 /**
- * Class CranleighGoogleApi
- * @package fredbradley\CranleighGoogleApi
+ * Class CranleighGoogleApi.
  */
 class CranleighGoogleApi
 {
@@ -52,9 +51,8 @@ class CranleighGoogleApi
      */
     public function __toString()
     {
-        return "Scoped: " . implode(", ", $this->scopes);
+        return 'Scoped: '.implode(', ', $this->scopes);
     }
-
 
     /**
      * @param array $scopes
@@ -66,7 +64,7 @@ class CranleighGoogleApi
         $client = new \Google_Client();
         $client->setApplicationName('Reports API PHP Quickstart');
         $client->setScopes($scopes);
-        $client->setAuthConfig(base_path() . '/' . config('cranleighgoogleapi.credentials_json_file'));
+        $client->setAuthConfig(base_path().'/'.config('cranleighgoogleapi.credentials_json_file'));
 
         $client->setAccessType('offline');
         $client->setPrompt('select_account consent');
@@ -90,9 +88,8 @@ class CranleighGoogleApi
                 // Request authorization from the user.
                 $authUrl = $client->createAuthUrl();
                 printf("Open the following link in your browser:\n%s\n", $authUrl);
-                print 'Enter verification code: ';
-                $authCode = trim(fgets(fopen("php://stdin", "r")));
-
+                echo 'Enter verification code: ';
+                $authCode = trim(fgets(fopen('php://stdin', 'r')));
 
                 // Exchange authorization code for an access token.
                 $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
@@ -100,7 +97,7 @@ class CranleighGoogleApi
 
                 // Check to see if there was an error.
                 if (array_key_exists('error', $accessToken)) {
-                    throw new \Exception(join(', ', $accessToken));
+                    throw new \Exception(implode(', ', $accessToken));
                 }
             }
             // Save the token to a file.

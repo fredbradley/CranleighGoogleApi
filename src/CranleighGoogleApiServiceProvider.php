@@ -32,7 +32,7 @@ class CranleighGoogleApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/cranleighgoogleapi.php', 'cranleighgoogleapi');
+        $this->mergeConfigFrom(__DIR__.'/../config/cranleighgoogleapi.php', 'cranleighgoogleapi');
 
         // Register the service the package provides.
         $this->app->singleton('cranleighgoogleapi', function ($app) {
@@ -59,7 +59,7 @@ class CranleighGoogleApiServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__ . '/../config/cranleighgoogleapi.php' => config_path('cranleighgoogleapi.php'),
+            __DIR__.'/../config/cranleighgoogleapi.php' => config_path('cranleighgoogleapi.php'),
         ], 'cranleighgoogleapi.config');
 
         // Publishing the views.
