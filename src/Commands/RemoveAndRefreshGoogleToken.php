@@ -23,16 +23,6 @@ class RemoveAndRefreshGoogleToken extends Command
     protected $description = 'Removes the token.json and requests it again';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @param CranleighGoogleApi $api

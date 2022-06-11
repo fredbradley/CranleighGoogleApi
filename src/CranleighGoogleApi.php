@@ -15,20 +15,20 @@ class CranleighGoogleApi
     /**
      * @var \Google_Client
      */
-    protected $client;
+    protected \Google_Client $client;
     /**
      * @var \Google_Service_Drive
      */
-    public $drive;
+    public \Google_Service_Drive $drive;
     /**
      * @var \Google_Service_Reports
      */
-    public $reports;
+    public \Google_Service_Reports $reports;
 
     /**
      * @var array
      */
-    private $scopes = [
+    private array $scopes = [
         \Google_Service_Drive::DRIVE,
         \Google_Service_Reports::ADMIN_REPORTS_USAGE_READONLY,
         \Google_Service_Reports::ADMIN_REPORTS_AUDIT_READONLY,
@@ -50,7 +50,7 @@ class CranleighGoogleApi
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString():string
     {
         return "Scoped: " . implode(", ", $this->scopes);
     }
@@ -61,15 +61,21 @@ class CranleighGoogleApi
      * @return \Google_Client
      * @throws \Google_Exception
      */
-    private function getClient($scopes = [])
+    private function getClient(array $scopes = [], string $subject='frb@cranleigh.org'): \Google_Client
     {
         $client = new \Google_Client();
         $client->setApplicationName('Reports API PHP Quickstart');
         $client->setScopes($scopes);
-        $client->setAuthConfig(base_path() . '/' . config('cranleighgoogleapi.credentials_json_file'));
-
+        if ($subject) {
+            $client->setSubject($subject);
+        }
+        //$client->setAuthConfig(base_path() . '/' . config('cranleighgoogleapi.credentials_json_file'));
+        $file = "/Users/frederikbradley/Sites/pastoral-module/cranleigh-pastoral-module-fbb6f9c261ae.json";
+        //putenv('GOOGLE_APPLICATION_CREDENTIALS='.$file);
+        $client->setAuthConfig($file);
         $client->setAccessType('offline');
         $client->setPrompt('select_account consent');
+
 
         // Load previously authorized token from a file, if it exists.
         // The file token.json stores the user's access and refresh tokens, and is
